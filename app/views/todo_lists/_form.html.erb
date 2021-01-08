@@ -1,22 +1,23 @@
-<%= form_with(model: todo_list, local: true) do |form| %>
-  <% if todo_list.errors.any? %>
+<%= form_with(model: @todo_list, local: true) do |form| %>
+  <% if @todo_list.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
+      <h2><%= pluralize(@todo_list.errors.count, "error") %></h2>
 
       <ul>
-        <% todo_list.errors.full_messages.each do |message| %>
+        <% @todo_list.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="input-group w-100 flex-column justify-content-center flex-nowrap mt-3 mb-3">
+    <%= form.text_field :title, class: "form-control w-100", data: { reflex: 'change->TodoItem#form', id: current_user.id }, placeholder: 'Create new list' %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
+
+    <div class="input-group-append d-flex justify-content-center mt-2">
+      <%= form.submit 'Add', class: "btn btn-success w-50" %>
+    </div>
   </div>
 <% end %>

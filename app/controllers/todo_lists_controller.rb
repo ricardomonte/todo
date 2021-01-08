@@ -15,7 +15,7 @@ class TodoListsController < ApplicationController
 
   # GET /todo_lists/new
   def new
-    @todo_list = TodoList.new
+    @todo_list ||= TodoList.new
   end
 
   # GET /todo_lists/1/edit
@@ -27,12 +27,13 @@ class TodoListsController < ApplicationController
   def create
     @todo_list = TodoList.new(todo_list_params)
 
+
     respond_to do |format|
       if @todo_list.save
-        format.html { redirect_to @todo_list, notice: 'Todo list was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Todo list was successfully created.' }
         format.json { render :show, status: :created, location: @todo_list }
       else
-        format.html { render :new }
+        format.html { redirect_to root_path }
         format.json { render json: @todo_list.errors, status: :unprocessable_entity }
       end
     end
@@ -70,6 +71,6 @@ class TodoListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_list_params
-      params.require(:todo_list).permit(:title)
+      params.require(:todo_list).permit(:title, :user_id)
     end
 end

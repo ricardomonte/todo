@@ -1,0 +1,27 @@
+
+<% if user_signed_in? %>
+  <div class='container mt-5'>
+    <div class="row d-flex justify-content-center">
+      <div class="col-5">
+        <div class="text-center mb-5">
+          <h1>What you need to do!</h1>
+        </div>
+
+        <%= render 'todo_lists/form', todo_list: @todo_list  %>
+
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <% my_todo(current_user.todo_lists) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
+
+<!--
+
+-->
+

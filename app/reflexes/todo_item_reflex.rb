@@ -3,13 +3,18 @@
 class TodoItemReflex < ApplicationReflex
 
   def all_good
-    todoitem = TodoItem.find(element.dataset[:id])
+    todoitem = TodoItem.find(element.dataset[:id]) || TodoItem.find(1)
     todoitem.update(completed: true, completed_at: Time.now)
   end
 
   def not_yet
-    todoitem = TodoItem.find(element.dataset[:id])
+    todoitem = TodoItem.find(element.dataset[:id]) || TodoItem.find(1)
     todoitem.update(completed: false, completed_at: nil)
+  end
+
+  def form
+    @todo_list = TodoList.new(title: element[:value], user_id: element.dataset[:id])
+    @todo_list.valid?
   end
   # Add Reflex methods in this file.
   #
