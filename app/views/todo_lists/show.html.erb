@@ -8,21 +8,20 @@
             <strong><%= @todo_list.title %></strong>
           </h5>
         </div>
-
-        <ul  class='card-body'>
-          <%= form_for([@todo_list, @todo_item]) do |f| %>
-            <div class="d-flex mb-4">
-              <div class="input-group">
-                <%= f.text_field :description, class: 'form-control', placeholder: "Add new item" %>
-              </div>
-              <div class="input-group-append">
-                <%= f.submit 'Add' %>
-              </div>
+        <%= form_for([@todo_list, @todo_item]) do |f| %>
+          <div class="d-flex list-group-item">
+            <div class="input-group">
+              <%= f.text_field :description, class: 'form-control', placeholder: "Add new item" %>
             </div>
-          <% end %>
-          <div class="progress mb-4">
-            <div class="progress-bar" role="progressbar" style="width: <%= @todo_list.percent_completed %>%" aria-valuenow="<%= @todo_list.percent_completed %>" aria-valuemin="0" aria-valuemax="100"><%= @todo_list.percent_completed %> %</div>
+            <div class="input-group-append">
+              <%= f.submit 'Add' %>
+            </div>
           </div>
+        <% end %>
+        <div class="progress ml-4 mr-4 mt-4">
+          <div class="progress-bar" role="progressbar" style="width: <%= @todo_list.percent_completed %>%" aria-valuenow="<%= @todo_list.percent_completed %>" aria-valuemin="0" aria-valuemax="100"><%= @todo_list.percent_completed %> %</div>
+        </div>
+        <ul class='card-body'>
           <% @todo_list.todo_items.each do |todo_item| %>
             <% if todo_item.completed? %>
               <li class='list-group-item'>
